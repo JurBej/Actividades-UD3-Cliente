@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let respuestaPrompt = "";
+        const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+        const arrayLetras = [];
+
+        const solicitaDNI = () => {
+            respuestaPrompt = prompt("Introduce un DNI. (Para salir introduce -1)");
+            if (respuestaPrompt === "-1") {
+                clearInterval(interval);
+                document.write(arrayLetras);
+            } else {
+                if (respuestaPrompt.length != 8){
+                    alert("Debe introducir 8 digitos");
+                } else {
+                    arrayLetras.push(letras.charAt(respuestaPrompt%23));
+                }
+            }
+        }
+
+        const interval = setInterval(solicitaDNI, 5000);
+        
+    </script>
+</body>
+</html>

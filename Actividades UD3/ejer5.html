@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const mostrarInfo = () => {
+            let respuestaPrompt = prompt("Introduce tus datos con este formato; nombre:apellidos:telefono:email:codigopostal");
+            const info = respuestaPrompt.split(':');
+            let emailPartido = info[3].split('@');
+            let servidor = emailPartido.length === 2 ? emailPartido[1] : "No indica servidor";
+
+            return document.write(`Código postal: ${info[4]}<br> Apellidos: ${info[1]}<br> Email: ${info[3]}<br> Servidor: ${servidor}`);
+        }
+
+        mostrarInfo();
+    </script>
+</body>
+</html>

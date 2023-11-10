@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tabla-container">
+
+    </div>
+
+    <script>
+        let respuestaPrompt = prompt("1. Todos los usuarios.\n"+
+        "2. Usuarios de una provincia.\n"+
+        "3. Usuarios que tengan una cuota mayor o menor que un valor.\nElige una opción del 1 al 3");
+
+        let datos = `Cliente;Localidad;Cuota
+        Laura;Santander;50
+        Álvaro;Castro;50
+        Igor;Castro;60
+        Ivan;Santander;40
+        Mónica;Zamora;30
+        Javi;Bilbao;30
+        David;Bilbao;50
+        José Luis;Bilbao;60`;
+
+        let lineas = datos.split('\n');
+
+        const mostrarUsuarios = () => {
+            let contenedorTabla = document.getElementById('tabla-container');
+            let tablaHTML = '<table border="1"><tr><th>Cliente</th><th>Localidad</th><th>Cuota</th></tr>';
+            
+            for (let index = 1; index < lineas.length; index++) {
+                let campos = lineas[index].split(';');
+                tablaHTML+= `<tr><td>${campos[0]}</td><td>${campos[1]}</td><td>${campos[2]}</td></tr>`;
+            }
+
+            tablaHTML += '</table>';
+            return contenedorTabla.innerHTML = tablaHTML;
+        }
+
+        const usuariosProvincia = (respuestaProvincia) => {
+            let contenedorTabla = document.getElementById('tabla-container');
+            let tablaHTML = '<table border="1"><tr><th>Cliente</th><th>Cuota</th></tr>';
+
+            for (let index = 1; index < lineas.length; index++) {
+                let campos = lineas[index].split(';');
+                if (campos[1].toLocaleLowerCase() == respuestaProvincia.toLocaleLowerCase()) {
+                    tablaHTML += `<tr><td>${campos[0]}</td><td>${campos[2]}</td></tr>`;
+                }
+            }
+
+            tablaHTML += '</table>';
+            return contenedorTabla.innerHTML = tablaHTML;
+        }
+
+        const usuariosPorCuota = (operador ,cuota) => {
+            let contenedorTabla = document.getElementById('tabla-container');
+            let tablaHTML = '<table border="1"><tr><th>Cliente</th><th>Localidad</th><th>Cuota</th></tr>';
+
+            for (let index = 1; index < lineas.length; index++) {
+                let campos = lineas[index].split(';');
+                if (operador == "-") {
+                    if (campos[2] < cuota) {
+                        tablaHTML += `<tr><td>${campos[0]}</td><td>${campos[1]}</td><td>${campos[2]}</td></tr>`;
+                    }
+                } else if (operador == "+") {
+                    if (campos[2] > cuota) {
+                        tablaHTML += `<tr><td>${campos[0]}</td><td>${campos[1]}</td><td>${campos[2]}</td></tr>`;
+                    }
+                } else {
+                    alert("Introduce un operador correcto. (- o +)");
+                }
+            }
+
+            tablaHTML += '</table>';
+            return contenedorTabla.innerHTML = tablaHTML;
+        }
+
+        switch (respuestaPrompt) {
+            case "1":
+                mostrarUsuarios();
+                break;
+            case "2":
+                let respuestaProvincia = prompt("Introduce una provincia");
+                usuariosProvincia(respuestaProvincia);
+                break;
+            case "3":
+                let operador = prompt("Introduce el operador. Debe ser '-' o '+'");
+                let cuota = prompt("Introduce la cuota");
+                usuariosPorCuota(operador, cuota);
+                break;
+        
+            default:
+                alert("Introduce una opción del 1 al 3");
+                break;
+        }
+
+    </script>
+</body>
+</html>

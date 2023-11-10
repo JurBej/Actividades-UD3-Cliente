@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let cantidad = 50;
+        while (cantidad>0 && cantidad<200) {
+            let promptDado = parseInt(prompt("Introduce un dado del 1 al 6"));
+            let promptCantidad = parseInt(prompt("Introduce la cantidad a apostar"));
+            let dadoAzar = Math.floor(Math.random() * 6) + 1;
+            console.log(dadoAzar);
+
+            if (promptCantidad>cantidad || promptDado<1 || promptDado>6) {
+                alert("No puede apostar más cantidad de la que tiene, ni apostar a un dado menor que 1 o mayor que 6");
+                continue;
+            }
+
+            if (promptDado == dadoAzar) {
+                cantidad = cantidad + (promptCantidad*2);
+            } else {
+                cantidad = cantidad - promptCantidad;
+            }
+            alert("Cantidad: "+cantidad);
+        }
+
+        if (cantidad<=0) {
+            document.write("Ha perdido");
+        } else if (cantidad>=200) {
+            document.write("Ha ganado");
+        }
+    </script>
+</body>
+</html>
